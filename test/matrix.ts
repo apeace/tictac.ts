@@ -86,15 +86,6 @@ describe('matrix', () => {
       expect(equals(empty, oneByOne)).to.not.be.ok();
     });
 
-    it('Works on a 1x1', () => {
-      expect(equals(oneByOne, oneByOne)).to.be.ok();
-      expect(equals(oneByOne, twoByTwo)).to.not.be.ok();
-      let otherOneByOne = [
-        [2]
-      ];
-      expect(equals(oneByOne, otherOneByOne)).to.not.be.ok();
-    });
-
     it('Works on a 1x2', () => {
       expect(equals(oneByTwo, oneByTwo)).to.be.ok();
       expect(equals(oneByTwo, twoByTwo)).to.not.be.ok();
@@ -115,5 +106,23 @@ describe('matrix', () => {
     });
 
   }); // end equals()
+
+  describe('clone()', () => {
+
+    let clone = matrix.clone;
+
+    it('Works on empty matrix', () => {
+      let result = clone(empty);
+      expect(result).to.eql(empty);
+      expect(result === empty).to.not.be.ok();
+    });
+
+    it('Works on a 2x2', () => {
+      let result = clone(twoByTwo);
+      expect(result).to.eql(twoByTwo);
+      expect(result === twoByTwo).to.not.be.ok();
+    });
+
+  }); // end clone()
 
 });

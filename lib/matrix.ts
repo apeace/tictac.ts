@@ -1,4 +1,3 @@
-
 export type Matrix = number[][];
 
 export function equals (a: Matrix, b: Matrix) {
@@ -29,4 +28,12 @@ export function rotateClockwise (matrix: Matrix): Matrix {
     }
   }
   return rotated;
+}
+
+export function clone (matrix: Matrix): Matrix {
+  let cloned: Matrix = [];
+  for (let row = 0; row < matrix.length; row++) {
+    cloned.push(matrix[row].slice());
+  }
+  return cloned;
 }
