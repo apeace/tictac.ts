@@ -7,14 +7,16 @@ import matrix = require('../lib/matrix');
 
 describe('GameState', () => {
 
+  const emptyMatrix = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ];
+
   describe('constructor', () => {
 
     it('Can be constructed with 3x3 matrix', () => {
-      let gamestate = new GameState([
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
-      ]);
+      let gamestate = new GameState(emptyMatrix);
     });
 
     it('Cannot be constructed with less than three rows', () => {
@@ -41,6 +43,36 @@ describe('GameState', () => {
       }
     });
 
-  });
+  }); // end constructor
+
+  describe('equals()', () => {
+
+    it('Works for exact equality', () => {
+      let state1 = new GameState(emptyMatrix);
+      let state2 = new GameState(emptyMatrix);
+      let state3 = new GameState([
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+      ]);
+      expect(state1.equals(state2)).to.be.ok();
+      expect(state1.equals(state3)).to.not.be.ok();
+    });
+
+    it('Works for rotated equality', () => {
+      var state1 = new GameState([
+        [1, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ]);
+      var state2 = new GameState(matrix.rotateClockwise(state1.matrix));
+      var state3 = new GameState(matrix.rotateClockwise(state2.matrix));
+      var state4 = new GameState(matrix.rotateClockwise(state3.matrix));
+      expect(state1.equals(state2)).to.be.ok();
+      expect(state1.equals(state3)).to.be.ok();
+      expect(state1.equals(state4)).to.be.ok();
+    });
+
+  }); // end equals()
 
 });
