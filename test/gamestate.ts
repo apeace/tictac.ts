@@ -12,6 +12,21 @@ describe('GameState', () => {
     [0, 0, 0],
     [0, 0, 0],
   ];
+  const winner1Matrix = [
+    [0, 2, 1],
+    [2, 0, 1],
+    [0, 2, 1]
+  ];
+  const winner2Matrix = [
+    [1, 0, 2],
+    [0, 2, 1],
+    [2, 0, 1]
+  ];
+  const fullMatrix = [
+    [1, 2, 1],
+    [2, 1, 1],
+    [2, 1, 2]
+  ];
 
   describe('constructor', () => {
 
@@ -47,24 +62,16 @@ describe('GameState', () => {
 
   describe('equals()', () => {
 
-    it('Works for exact equality', () => {
+    it('Detects exact equality', () => {
       let state1 = new GameState(emptyMatrix);
       let state2 = new GameState(emptyMatrix);
-      let state3 = new GameState([
-        [0, 0, 0],
-        [0, 1, 0],
-        [0, 0, 0]
-      ]);
+      let state3 = new GameState(winner1Matrix);
       expect(state1.equals(state2)).to.be.ok();
       expect(state1.equals(state3)).to.not.be.ok();
     });
 
-    it('Works for rotated equality', () => {
-      var state1 = new GameState([
-        [1, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-      ]);
+    it('Detects rotated equality', () => {
+      var state1 = new GameState(winner1Matrix);
       var state2 = new GameState(matrix.rotateClockwise(state1.matrix));
       var state3 = new GameState(matrix.rotateClockwise(state2.matrix));
       var state4 = new GameState(matrix.rotateClockwise(state3.matrix));
@@ -74,5 +81,40 @@ describe('GameState', () => {
     });
 
   }); // end equals()
+
+  describe('winner()', () => {
+
+    it('Detects winner 1', () => {
+      var state = new GameState(winner1Matrix);
+      expect(state.winner()).to.eql(1);
+    });
+
+    it('Detects winner 2', () => {
+      var state = new GameState(winner2Matrix);
+      expect(state.winner()).to.eql(2);
+    });
+
+    it('Detects no winner', () => {
+      var state = new GameState(emptyMatrix);
+      expect(state.winner()).to.not.be.ok();
+    });
+
+  }); // end winner()
+
+  describe('full()', () => {
+
+    it('Detects full', () => {
+      var state = new GameState(fullMatrix);
+      expect(state.full()).to.be.ok();
+    });
+
+    it('Detects not full', () => {
+      var state1 = new GameState(emptyMatrix);
+      expect(state1.full()).to.not.be.ok();
+      var state2 = new GameState(winner2Matrix);
+      expect(state2.full()).to.not.be.ok();
+    });
+
+  }); // end full()
 
 });
