@@ -24,7 +24,7 @@ class GameState {
   }
 
   equals(gamestate: GameState): boolean {
-    var m = gamestate.matrix;
+    let m = gamestate.matrix;
     // compare the matrices each time before rotating,
     // but don't rotate after the last comparison
     for (let i = 0; i < 4; i++) {
