@@ -1,4 +1,3 @@
-
 import matrix = require('./matrix');
 
 export = GameState;
@@ -25,15 +24,33 @@ class GameState {
 
   equals(gamestate: GameState): boolean {
     let m = gamestate.matrix;
-    // compare the matrices each time before rotating,
+    // compare against all rotations of the gamestate matrix
     // but don't rotate after the last comparison
     for (let i = 0; i < 4; i++) {
       if (matrix.equals(this._matrix, m)) {
         return true;
       }
       if (i < 3) {
-        m = matrix.rotateClockwise(m);
+        m = matrix.rotateClockwise90(m);
       }
+    }
+    // compare against transpositions (reflect over diagonals)
+    m = matrix.transpose(gamestate.matrix);
+    if (matrix.equals(this._matrix, m)) {
+      return true;
+    }
+    m = matrix.reverseTranspose(gamestate.matrix);
+    if (matrix.equals(this._matrix, m)) {
+      return true;
+    }
+    // compare against flips (reflect over vertical/horizontal)
+    m = matrix.flipHorizontal(gamestate.matrix);
+    if (matrix.equals(this._matrix, m)) {
+      return true;
+    }
+    m = matrix.flipVertical(gamestate.matrix);
+    if (matrix.equals(this._matrix, m)) {
+      return true;
     }
     return false;
   }

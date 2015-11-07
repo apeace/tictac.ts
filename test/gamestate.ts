@@ -72,12 +72,28 @@ describe('GameState', () => {
 
     it('Detects rotated equality', () => {
       let state1 = new GameState(winner1Matrix);
-      let state2 = new GameState(matrix.rotateClockwise(state1.matrix));
-      let state3 = new GameState(matrix.rotateClockwise(state2.matrix));
-      let state4 = new GameState(matrix.rotateClockwise(state3.matrix));
+      let state2 = new GameState(matrix.rotateClockwise90(state1.matrix));
+      let state3 = new GameState(matrix.rotateClockwise90(state2.matrix));
+      let state4 = new GameState(matrix.rotateClockwise90(state3.matrix));
       expect(state1.equals(state2)).to.be.ok();
       expect(state1.equals(state3)).to.be.ok();
       expect(state1.equals(state4)).to.be.ok();
+    });
+
+    it('Detects transposed equality', () => {
+      let state1 = new GameState(winner1Matrix);
+      let state2 = new GameState(matrix.transpose(state1.matrix));
+      let state3 = new GameState(matrix.reverseTranspose(state2.matrix));
+      expect(state1.equals(state2)).to.be.ok();
+      expect(state1.equals(state3)).to.be.ok();
+    });
+
+    it('Detects flipped equality', () => {
+      let state1 = new GameState(winner1Matrix);
+      let state2 = new GameState(matrix.flipVertical(state1.matrix));
+      let state3 = new GameState(matrix.flipHorizontal(state2.matrix));
+      expect(state1.equals(state2)).to.be.ok();
+      expect(state1.equals(state3)).to.be.ok();
     });
 
   }); // end equals()
