@@ -25,7 +25,7 @@ export function clone (matrix: Matrix): Matrix {
   return cloned;
 }
 
-export function rotateClockwise (matrix: Matrix): Matrix {
+export function rotateClockwise90 (matrix: Matrix): Matrix {
   let rotated: Matrix = [];
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix[row].length; col++) {
@@ -36,6 +36,14 @@ export function rotateClockwise (matrix: Matrix): Matrix {
     }
   }
   return rotated;
+}
+
+export function rotateClockwise180 (matrix: Matrix): Matrix {
+  return rotateClockwise90(rotateClockwise90(matrix));
+}
+
+export function rotateClockwise270 (matrix: Matrix): Matrix {
+  return rotateClockwise90(rotateClockwise90(rotateClockwise90(matrix)));
 }
 
 export function transpose (matrix: Matrix): Matrix {

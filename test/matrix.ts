@@ -81,9 +81,9 @@ describe('matrix', () => {
 
   }); // end clone()
 
-  describe('rotateClockwise()', () => {
+  describe('rotateClockwise90()', () => {
 
-    let rotateClockwise = matrix.rotateClockwise;
+    let rotateClockwise90 = matrix.rotateClockwise90;
 
     // the above matrices, rotated clockwise
     const oneByOneRotated = [
@@ -106,30 +106,73 @@ describe('matrix', () => {
     ];
 
     it('Works on empty matrix', () => {
-      expect(rotateClockwise(empty)).to.eql(empty);
+      expect(rotateClockwise90(empty)).to.eql(empty);
     });
 
     it('Works on a 1x1', () => {
-      expect(rotateClockwise(oneByOne)).to.eql(oneByOne);
+      expect(rotateClockwise90(oneByOne)).to.eql(oneByOne);
     });
 
     it('Works on a 1x2', () => {
-      expect(rotateClockwise(oneByTwo)).to.eql(oneByOneRotated);
+      expect(rotateClockwise90(oneByTwo)).to.eql(oneByOneRotated);
     });
 
     it('Works on a 2x2', () => {
-      expect(rotateClockwise(twoByTwo)).to.eql(twoByTwoRotated);
+      expect(rotateClockwise90(twoByTwo)).to.eql(twoByTwoRotated);
     });
 
     it('Works on a 2x3', () => {
-      expect(rotateClockwise(twoByThree)).to.eql(twoByThreeRotated);
+      expect(rotateClockwise90(twoByThree)).to.eql(twoByThreeRotated);
     });
 
     it('Works on a 3x3', () => {
-      expect(rotateClockwise(threeByThree)).to.eql(threeByThreeRotated);
+      expect(rotateClockwise90(threeByThree)).to.eql(threeByThreeRotated);
     });
 
-  }); // end rotateClockwise()
+  }); // end rotateClockwise90()
+
+  describe('rotateClockwise180()', () => {
+
+    let rotateClockwise90 = matrix.rotateClockwise90;
+    let rotateClockwise180 = matrix.rotateClockwise180;
+
+    it('Works on empty matrix', () => {
+      expect(rotateClockwise180(empty)).to.eql(empty);
+    });
+
+    it('Works on a 2x3', () => {
+      let rotated = rotateClockwise90(rotateClockwise90(twoByThree));
+      expect(rotateClockwise180(twoByThree)).to.eql(rotated);
+    });
+
+    it('Works on a 3x3', () => {
+      let rotated = rotateClockwise90(rotateClockwise90(threeByThree));
+      expect(rotateClockwise180(threeByThree)).to.eql(rotated);
+    });
+
+  }); // end rotateClockwise180()
+
+  describe('rotateClockwise180()', () => {
+
+    let rotateClockwise90 = matrix.rotateClockwise90;
+    let rotateClockwise180 = matrix.rotateClockwise180;
+    let rotateClockwise270 = matrix.rotateClockwise270;
+
+    it('Works on empty matrix', () => {
+      expect(rotateClockwise270(empty)).to.eql(empty);
+    });
+
+    it('Works on a 2x3', () => {
+      let rotated = rotateClockwise180(rotateClockwise90(twoByThree));
+      expect(rotateClockwise270(twoByThree)).to.eql(rotated);
+    });
+
+    it('Works on a 3x3', () => {
+      let rotated = rotateClockwise180(rotateClockwise90(threeByThree));
+      expect(rotateClockwise270(threeByThree)).to.eql(rotated);
+    });
+
+  }); // end rotateClockwise270()
 
   describe('transpose()', () => {
 
