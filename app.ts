@@ -11,13 +11,53 @@ let before = (new Date().getTime());
 let tree = new gametree.Node(1, emptyState);
 let after = (new Date().getTime());
 
-console.log('%dms', (after - before));
+console.log('Took %dms to generate game tree', (after - before));
 console.log(tree);
 
-let table = document.getElementById('table');
-table.addEventListener('click', (e: MouseEvent) => {
+let currentState = document.getElementById('currentState');
+let stateChoices = document.getElementById('stateChoices');
+
+stateChoices.addEventListener('click', (e) => {
   let el = <HTMLElement>e.target;
-  // parse the id "cell3" into the number 3
-  let id = parseInt(el.id.substring(4));
-  el.innerHTML = String(id);
+  if (el.tagName === 'TABLE') {
+    // that's what we want
+  } else if (el.tagName === 'TBODY') {
+    el = el.parentElement;
+  } else if (el.tagName === 'TR') {
+    el = el.parentElement.parentElement;
+  } else if (el.tagName === 'TD') {
+    el = el.parentElement.parentElement.parentElement;
+  } else {
+    // ignore clicks to the div itself
+    return;
+  }
+  let move = Number(el.getAttribute('data-move'));
+  tree = tree.moves[move].result;
+  drawGame();
 });
+
+drawGame();
+
+function stateToHTML(state: GameState, moveIdx?: number): string {
+  let table = '<table>';
+  if (moveIdx !== null) {
+    table = '<table data-move="' + String(moveIdx) + '">';
+  }
+  return table + state.matrix.map(rowToHTML).join('\n') + '</table>';
+}
+
+function rowToHTML(row: number[]): string {
+  return '  <tr>' + row.map(cellToHTHML).join('\n'); + '</tr>';
+}
+
+function cellToHTHML(cell: number): string {
+  let letter = cell === 0 ? '' : (cell === 1 ? 'X' : 'O');
+  return '    <td>' + letter + '</td>';
+}
+
+function drawGame() {
+  currentState.innerHTML = stateToHTML(tree.gamestate);
+  stateChoices.innerHTML = tree.moves.map((move, idx) => {
+    return stateToHTML(move.result.gamestate, idx);
+  }).join('\n');
+}

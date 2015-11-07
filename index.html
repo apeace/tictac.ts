@@ -3,33 +3,27 @@
 <head>
   <title>Tic Tac Toe Solver</title>
   <style>
-    #table td {
-      width: 100px;
-      height: 100px;
+    div {
+      height: 200px;
+    }
+    table {
+      height: 200px;
+      width: 200px;
+      float: left;
+      padding-right: 20px;
+    }
+    td {
       border: 1px solid #000;
+      width: 33%;
+      height: 33%;
       text-align: center;
       font-size: 24px;
     }
   </style>
 </head>
 <body>
-  <table id="table">
-    <tr>
-      <td id="cell0"></td>
-      <td id="cell1"></td>
-      <td id="cell2"></td>
-    </tr>
-    <tr>
-      <td id="cell3"></td>
-      <td id="cell4"></td>
-      <td id="cell5"></td>
-    </tr>
-    <tr>
-      <td id="cell6"></td>
-      <td id="cell7"></td>
-      <td id="cell8"></td>
-    </tr>
-  </table>
+  <div id="currentState"></div>
+  <div id="stateChoices"></div>
   <script src="build/bundle.js"></script>
 </body>
 </html>

@@ -39,3 +39,8 @@ open 'http://localhost:8000'
 For editing, I recommend [Sublime Text 3](https://www.sublimetext.com/3)
 and the
 [Typescript plugin](https://github.com/Microsoft/TypeScript-Sublime-Plugin).
+
+# Progress
+
+Right now if you run the app in a browser, it will allow you to progress
+through the game tree.
