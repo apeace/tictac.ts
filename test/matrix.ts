@@ -86,7 +86,7 @@ describe('matrix', () => {
     let rotateClockwise90 = matrix.rotateClockwise90;
 
     // the above matrices, rotated clockwise
-    const oneByOneRotated = [
+    const oneByTwoRotated = [
       [1],
       [2]
     ];
@@ -114,7 +114,7 @@ describe('matrix', () => {
     });
 
     it('Works on a 1x2', () => {
-      expect(rotateClockwise90(oneByTwo)).to.eql(oneByOneRotated);
+      expect(rotateClockwise90(oneByTwo)).to.eql(oneByTwoRotated);
     });
 
     it('Works on a 2x2', () => {
@@ -152,7 +152,7 @@ describe('matrix', () => {
 
   }); // end rotateClockwise180()
 
-  describe('rotateClockwise180()', () => {
+  describe('rotateClockwise270()', () => {
 
     let rotateClockwise90 = matrix.rotateClockwise90;
     let rotateClockwise180 = matrix.rotateClockwise180;
@@ -173,6 +173,62 @@ describe('matrix', () => {
     });
 
   }); // end rotateClockwise270()
+
+  describe('flipVertical()', () => {
+
+    let flipVertical = matrix.flipVertical;
+
+    // the above matrices, flipped vertically
+    const oneByTwoFlipped = [
+      [2, 1]
+    ];
+    const threeByThreeFlipped = [
+      [3, 2, 1],
+      [6, 5, 4],
+      [9, 8, 7]
+    ];
+
+    it('Works on empty matrix', () => {
+      expect(flipVertical(empty)).to.eql(empty);
+    });
+
+    it('Works on a 1x2', () => {
+      expect(flipVertical(oneByTwo)).to.eql(oneByTwoFlipped);
+    });
+
+    it('Works on a 3x3', () => {
+      expect(flipVertical(threeByThree)).to.eql(threeByThreeFlipped);
+    });
+
+  }); // end flipVertical()
+
+  describe('flipHorizontal()', () => {
+
+    let flipHorizontal = matrix.flipHorizontal;
+
+    // the above matrices, flipped horizontally
+    const oneByTwoFlipped = [
+      [1, 2]
+    ];
+    const threeByThreeFlipped = [
+      [7, 8, 9],
+      [4, 5, 6],
+      [1, 2, 3]
+    ];
+
+    it('Works on empty matrix', () => {
+      expect(flipHorizontal(empty)).to.eql(empty);
+    });
+
+    it('Works on a 1x2', () => {
+      expect(flipHorizontal(oneByTwo)).to.eql(oneByTwoFlipped);
+    });
+
+    it('Works on a 3x3', () => {
+      expect(flipHorizontal(threeByThree)).to.eql(threeByThreeFlipped);
+    });
+
+  }); // end flipHorizontal()
 
   describe('transpose()', () => {
 

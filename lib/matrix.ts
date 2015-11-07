@@ -46,6 +46,32 @@ export function rotateClockwise270 (matrix: Matrix): Matrix {
   return rotateClockwise90(rotateClockwise90(rotateClockwise90(matrix)));
 }
 
+export function flipVertical (matrix: Matrix): Matrix {
+  let flipped: Matrix = [];
+  for (let row = 0; row < matrix.length; row++) {
+    if (!flipped[row]) {
+      flipped.push([]);
+    }
+    for (let col = 0; col < matrix[row].length; col++) {
+      flipped[row].unshift(matrix[row][col]);
+    }
+  }
+  return flipped;
+}
+
+export function flipHorizontal (matrix: Matrix): Matrix {
+  let flipped: Matrix = [];
+  for (let row = 0; row < matrix.length; row++) {
+    if (!flipped[row]) {
+      flipped.unshift([]);
+    }
+    for (let col = 0; col < matrix[row].length; col++) {
+      flipped[0].push(matrix[row][col]);
+    }
+  }
+  return flipped;
+}
+
 export function transpose (matrix: Matrix): Matrix {
   let transposed: Matrix = [];
   for (let row = 0; row < matrix.length; row++) {
