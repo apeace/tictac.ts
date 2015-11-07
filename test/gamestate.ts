@@ -133,4 +133,20 @@ describe('GameState', () => {
 
   }); // end full()
 
+  describe('takeTurn()', () => {
+
+    it('Returns new GameState with turn applied', () => {
+      let state = new GameState(emptyMatrix);
+      state = state.takeTurn(1, 0, 0);
+      state = state.takeTurn(2, 1, 1);
+      let finalState = new GameState([
+        [1, 0, 0],
+        [0, 2, 0],
+        [0, 0, 0]
+      ]);
+      expect(state.equals(finalState)).to.be.ok();
+    });
+
+  }); // end takeTurn()
+
 });

@@ -90,4 +90,10 @@ class GameState {
     return true;
   }
 
+  takeTurn(player: number, row: number, col: number): GameState {
+    let m = matrix.clone(this._matrix);
+    m[row][col] = player;
+    return new GameState(m);
+  }
+
 }
