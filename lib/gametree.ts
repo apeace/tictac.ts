@@ -2,11 +2,16 @@ import GameState = require('./gamestate');
 
 export class Node {
 
+  playerTurn: number;
+  gamestate: GameState;
   moves: Move[];
   winner: number;
   full: boolean;
 
-  constructor(public playerTurn: number, public gamestate: GameState) {
+  constructor(playerTurn: number, gamestate: GameState) {
+    this.playerTurn = playerTurn;
+    this.gamestate = gamestate;
+    
     this.moves = [];
     this.winner = gamestate.winner();
     this.full = gamestate.full();
