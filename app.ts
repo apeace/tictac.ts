@@ -9,13 +9,14 @@ let emptyState = new GameState([
 
 let before = (new Date().getTime());
 let tree = new gametree.Node(1, emptyState);
+let rootTree = tree;
 let after = (new Date().getTime());
-
 console.log('Took %dms to generate game tree', (after - before));
 console.log(tree);
 
 let currentState = document.getElementById('currentState');
 let stateChoices = document.getElementById('stateChoices');
+let resetButton = document.getElementById('reset');
 
 stateChoices.addEventListener('click', (e) => {
   let el = <HTMLElement>e.target;
@@ -33,6 +34,11 @@ stateChoices.addEventListener('click', (e) => {
   }
   let move = Number(el.getAttribute('data-move'));
   tree = tree.moves[move].result;
+  drawGame();
+});
+
+resetButton.addEventListener('click', (e) => {
+  tree = rootTree;
   drawGame();
 });
 
