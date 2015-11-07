@@ -7,6 +7,8 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "http-server": "^0.8.5",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "typescript": "^1.6.2",
+    "watchify": "^3.6.0"
   }
 }
