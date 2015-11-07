@@ -17,6 +17,14 @@ export function equals (a: Matrix, b: Matrix) {
   return true;
 }
 
+export function clone (matrix: Matrix): Matrix {
+  let cloned: Matrix = [];
+  for (let row = 0; row < matrix.length; row++) {
+    cloned.push(matrix[row].slice());
+  }
+  return cloned;
+}
+
 export function rotateClockwise (matrix: Matrix): Matrix {
   let rotated: Matrix = [];
   for (let row = 0; row < matrix.length; row++) {
@@ -30,10 +38,29 @@ export function rotateClockwise (matrix: Matrix): Matrix {
   return rotated;
 }
 
-export function clone (matrix: Matrix): Matrix {
-  let cloned: Matrix = [];
+export function transpose (matrix: Matrix): Matrix {
+  let transposed: Matrix = [];
   for (let row = 0; row < matrix.length; row++) {
-    cloned.push(matrix[row].slice());
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (row == 0) {
+        transposed.push([]);
+      }
+      transposed[col].push(matrix[row][col]);
+    }
   }
-  return cloned;
+  return transposed;
+}
+
+export function reverseTranspose (matrix: Matrix): Matrix {
+  let transposed: Matrix = [];
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (row === 0) {
+        transposed.unshift([]);
+      }
+      let insertRow = (row === 0) ? 0 : matrix[row].length - col - 1;
+      transposed[insertRow].unshift(matrix[row][col]);
+    }
+  }
+  return transposed;
 }
