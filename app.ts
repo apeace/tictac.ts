@@ -1,3 +1,12 @@
+
+import minimax = require('./lib/minimax');
+import tictac = require('./lib/tictac');
+
+let tree = minimax.tree(tictac.Game);
+console.log(tree);
+
+/*
+
 import gametree = require('./lib/gametree');
 import GameState = require('./lib/gamestate');
 
@@ -78,3 +87,5 @@ function drawGame() {
   }).join('\n');
   console.log('Optimal move is %d', tree.optimalMove + 1);
 }
+
+*/
