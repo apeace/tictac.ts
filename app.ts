@@ -63,7 +63,18 @@ function cellToHTHML(cell: number): string {
 
 function drawGame() {
   currentState.innerHTML = stateToHTML(tree.gamestate);
+  console.log('>>>>>>>>>>>>');
   stateChoices.innerHTML = tree.moves.map((move, idx) => {
+    let outcomeDistances = move.result.outcomeDistance;
+    let outcomeCounts = move.result.outcomeCounts;
+    console.log('Move %d -- X moves: %d, O moves: %d, X wins: %d, O wins: %d',
+      idx + 1,
+      outcomeDistances[1],
+      outcomeDistances[2],
+      outcomeCounts[1],
+      outcomeCounts[2]
+    );
     return stateToHTML(move.result.gamestate, idx);
   }).join('\n');
+  console.log('Optimal move is %d', tree.optimalMove + 1);
 }
