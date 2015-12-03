@@ -13,13 +13,13 @@ export interface GameState<T> {
 }
 
 
-interface GameTree<T, M> {
+export interface GameTree<T, M> {
   current: GameState<T>;
   miniMaxScores?: {[player: number]: number};
   moveOutcomes?: MoveOutcome<T, M>[];
 }
 
-interface MoveOutcome<T, M> {
+export interface MoveOutcome<T, M> {
   move: M;
   outcome: GameTree<T, M>;
 }

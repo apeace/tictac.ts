@@ -9,17 +9,17 @@ import minimax = require('./minimax');
 export type Board = matrix.Matrix;
 
 // alias, for convenience
-export type TicTacState = minimax.GameState<Board>;
+export type State = minimax.GameState<Board>;
 
 // a TicTacMove is represented as the (x, y) coordinates
 // the player will take on the TicTacBoard
-export interface TicTacMove {
+export interface Move {
   x: number;
   y: number;
 }
 
 // a 3x3 TicTacToe game
-export let Game: minimax.Game<Board, TicTacMove> = {
+export let Game: minimax.Game<Board, Move> = {
 
   // there are two players, called 1 and 2
   players: [1, 2],
@@ -64,8 +64,8 @@ export let Game: minimax.Game<Board, TicTacMove> = {
 
   // returns list of possible moves that could be made
   // on the given board
-  moves: (board: Board): TicTacMove[] => {
-    let moveList: TicTacMove[] = [];
+  moves: (board: Board): Move[] => {
+    let moveList: Move[] = [];
     for (let row = 0; row < 3; row++) {
       for (let col = 0; col < 3; col++) {
         if (board[row][col] === 0) {
@@ -78,7 +78,7 @@ export let Game: minimax.Game<Board, TicTacMove> = {
 
   // returns a new board with the given move applied
   // to the given board
-  makeMove: (state: TicTacState, move: TicTacMove): TicTacState => {
+  makeMove: (state: State, move: Move): State => {
     let m = matrix.clone(state.state);
     m[move.x][move.y] = state.playerTurn;
     return {
