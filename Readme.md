@@ -1,9 +1,9 @@
 # TicTac.ts
 
-In progress.
+In progress. [See demo here](https://apeace.github.io/tictac.ts/)
 
-A Tic-Tac-Toe solver in Typescript, using a
-[game tree](https://en.wikipedia.org/wiki/Game_tree).
+A Tic-Tac-Toe solver in Typescript, using the
+[minimax algorithm](https://en.wikipedia.org/wiki/Minimax).
 
 # Dev setup
 
@@ -42,5 +42,7 @@ and the
 
 # Progress
 
-Right now if you run the app in a browser, it will allow you to progress
-through the game tree.
+Right now I have a playable 3x3 Tic-Tac-Toe game (see demo link above). Work is still
+in progress to be able to play *K-in-a-row* on an *NxN* board.
+
+Motivation for this was just to learn about minimax and play with Typescript :)
