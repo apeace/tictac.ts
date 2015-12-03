@@ -3,7 +3,7 @@
 <head>
   <title>Tic Tac Toe Solver</title>
   <style>
-    div {
+    #board {
       height: 200px;
       padding-bottom: 20px;
     }
@@ -23,10 +23,11 @@
   </style>
 </head>
 <body>
+  <div id="loader">Loading... (may take a few seconds)</div>
   <div id="board"></div>
   <div id="msgBox"></div>
   <div>
-    <button id="reset">Reset</button>
+    <button id="reset" style="display: none">Reset</button>
   </div>
   <script src="build/bundle.js"></script>
 </body>

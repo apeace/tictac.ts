@@ -8,9 +8,12 @@ let after = new Date().getTime();
 console.log('Took %dms to generate minimax tree', (after - before));
 console.log(tree);
 
+document.getElementById('loader').innerHTML = '';
+
 let board = document.getElementById('board');
 let msgBox = document.getElementById('msgBox');
 let resetButton = document.getElementById('reset');
+resetButton.style.display = 'inline-block';
 
 let gameOver = false;
 let errorMsg = '';
