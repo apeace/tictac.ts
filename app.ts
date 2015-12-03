@@ -1,4 +1,3 @@
-
 import minimax = require('./lib/minimax');
 import tictac = require('./lib/tictac');
 

@@ -27,46 +27,47 @@ describe('TicTac', () => {
     [2, 1, 2]
   ]; 
 
+  describe('isOver()', () => {
+
+    let isOver = tictac.Game.isOver;
+
+    it('Detects winner', () => {
+      expect(isOver(winner1Matrix)).to.eql(true);
+      expect(isOver(winner2Matrix)).to.eql(true);
+    });
+
+    it('Detects tie', () => {
+      expect(isOver(tieMatrix)).to.eql(true);
+    });
+
+    it('Detects incomplete game', () => {
+      expect(isOver(emptyMatrix)).to.eql(false);
+    });
+
+  }); // end isOver()
+
   describe('score()', () => {
 
     let score = tictac.Game.score;
 
     it('Detects winner 1', () => {
-      let state = winner1Matrix;
-      // player 1 wins
-      let score1 = score(state, 1);
-      expect(score1).to.eql({isTerminal: true, score: 1});
-      // player 2 loses
-      let score2 = score(state, 2);
-      expect(score2).to.eql({isTerminal: true, score: -1});
+      expect(score(winner1Matrix, 1)).to.eql(1);
+      expect(score(winner1Matrix, 2)).to.eql(-1);
     });
 
     it('Detects winner 2', () => {
-      let state = winner2Matrix;
-      // player 1 loses
-      let score1 = score(state, 1);
-      expect(score1).to.eql({isTerminal: true, score: -1});
-      // player 2 wins
-      let score2 = score(state, 2);
-      expect(score2).to.eql({isTerminal: true, score: 1});
+      expect(score(winner2Matrix, 1)).to.eql(-1);
+      expect(score(winner2Matrix, 2)).to.eql(1);
     });
 
     it('Detects tie', () => {
-      let state = tieMatrix;
-      // tie for both player 1 and player 2
-      let score1 = score(state, 1);
-      expect(score1).to.eql({isTerminal: true, score: 0});
-      let score2 = score(state, 2);
-      expect(score2).to.eql({isTerminal: true, score: 0});
+      expect(score(tieMatrix, 1)).to.eql(0);
+      expect(score(tieMatrix, 2)).to.eql(0);
     });
 
     it('Detects incomplete game', () => {
-      let state = emptyMatrix;
-      // incomplete for both player 1 and player 2
-      let score1 = score(state, 1);
-      expect(score1).to.eql({isTerminal: false, score: 0});
-      let score2 = score(state, 2);
-      expect(score2).to.eql({isTerminal: false, score: 0});
+      expect(score(emptyMatrix, 1)).to.eql(0);
+      expect(score(emptyMatrix, 2)).to.eql(0);
     });
 
   }); // end score()

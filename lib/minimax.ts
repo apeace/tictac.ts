@@ -1,17 +1,12 @@
-
 export interface GameState<T> {
   state: T;
   playerTurn: number;
 }
 
-export interface GameResult {
-  isTerminal: boolean;
-  score: number;
-}
-
 export interface Game<T, M> {
   initial: GameState<T>;
-  score(state: T, player: number): GameResult;
+  isOver(state: T): boolean;
+  score(state: T, player: number): number;
   moves(state: T): M[]
   makeMove(state: GameState<T>, move: M): GameState<T>
 }
@@ -44,9 +39,8 @@ export function computeTree<T, M> (game: Game<T, M>, tree: GameTree<T, M>, depth
   // TODO hard-coded: we always try to maximize the first player
   let maximizePlayer = game.initial.playerTurn;
 
-  let result = game.score(current.state, maximizePlayer);
-  if (result.isTerminal || depth === 0) {
-    tree.miniMaxScore = result.score;
+  if (game.isOver(current.state) || depth === 0) {
+    tree.miniMaxScore = game.score(current.state, maximizePlayer);
     return tree;
   }
 
