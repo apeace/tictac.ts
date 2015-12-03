@@ -1,6 +1,6 @@
 export interface Game<T, M> {
   players: number[];
-  initial: GameState<T>;
+  initialState: GameState<T>;
   isOver(state: T): boolean;
   score(state: T, player: number): number;
   moves(state: T): M[]
@@ -29,7 +29,7 @@ export interface MoveOutcome<T, M> {
 // computing the tree to a given lookAhead
 export function tree<T, M> (game: Game<T, M>, lookAhead=0): GameTree<T, M> {
   let tree = {
-    current: game.initial
+    current: game.initialState
   };
   return computeTree(game, tree, lookAhead);
 }

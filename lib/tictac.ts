@@ -4,15 +4,15 @@ import minimax = require('./minimax');
 // a Board is represented as a 2D matrix,
 // where each cell in the matrix is either 0, 1, or 2:
 // 0 = no player
-// 1 = player A
-// 2 = player B
+// 1 = player 1
+// 2 = player 2
 export type Board = matrix.Matrix;
 
 // alias, for convenience
 export type State = minimax.GameState<Board>;
 
-// a TicTacMove is represented as the (x, y) coordinates
-// the player will take on the TicTacBoard
+// a Move is represented as the (x, y) coordinates
+// the player will take on the Board
 export interface Move {
   x: number;
   y: number;
@@ -25,7 +25,7 @@ export let Game: minimax.Game<Board, Move> = {
   players: [1, 2],
 
   // initial state of a Tic-Tac-Toe game (empty board)
-  initial: {
+  initialState: {
     state: [
       [0, 0, 0],
       [0, 0, 0],
@@ -44,6 +44,7 @@ export let Game: minimax.Game<Board, Move> = {
     for (let row = 0; row < 3; row++) {
       for (let col = 0; col < 3; col++) {
         if (board[row][col] === 0) {
+          // found an empty space
           return false;
         }
       }
