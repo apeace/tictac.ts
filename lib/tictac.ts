@@ -21,6 +21,9 @@ export interface TicTacMove {
 // a 3x3 TicTacToe game
 export let Game: minimax.Game<Board, TicTacMove> = {
 
+  // there are two players, called 1 and 2
+  players: [1, 2],
+
   // initial state of a Tic-Tac-Toe game (empty board)
   initial: {
     state: [

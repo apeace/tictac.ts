@@ -64,7 +64,7 @@ function drawGame() {
     return;
   }
   stateChoices.innerHTML = tree.moveOutcomes.map((outcome, idx) => {
-    console.log('%d: %d', i, outcome.outcome.miniMaxScore);
+    console.log('%d: %d / %d', i, outcome.outcome.miniMaxScores[1], outcome.outcome.miniMaxScores[2]);
     i++;
     return boardToHTML(outcome.outcome.current.state, idx);
   }).join('\n');
