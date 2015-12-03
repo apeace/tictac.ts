@@ -7,14 +7,14 @@ import minimax = require('./minimax');
 // 0 = no player
 // 1 = player A
 // 2 = player B
-type Board = matrix.Matrix;
+export type Board = matrix.Matrix;
 
 // alias, for convenience
-type TicTacState = minimax.GameState<Board>;
+export type TicTacState = minimax.GameState<Board>;
 
 // a TicTacMove is represented as the (x, y) coordinates
 // the player will take on the TicTacBoard
-interface TicTacMove {
+export interface TicTacMove {
   x: number;
   y: number;
 }

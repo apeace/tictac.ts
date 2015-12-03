@@ -2,25 +2,11 @@
 import minimax = require('./lib/minimax');
 import tictac = require('./lib/tictac');
 
-let tree = minimax.tree(tictac.Game);
-console.log(tree);
-
-/*
-
-import gametree = require('./lib/gametree');
-import GameState = require('./lib/gamestate');
-
-let emptyState = new GameState([
-  [0, 0, 0],
-  [0, 0, 0],
-  [0, 0, 0]
-]);
-
-let before = (new Date().getTime());
-let tree = new gametree.Node(1, emptyState);
+let before = new Date().getTime();
+let tree = minimax.tree(tictac.Game, -1);
 let rootTree = tree;
-let after = (new Date().getTime());
-console.log('Took %dms to generate game tree', (after - before));
+let after = new Date().getTime();
+console.log('Took %dms to generate minimax tree', (after - before));
 console.log(tree);
 
 let currentState = document.getElementById('currentState');
@@ -42,7 +28,7 @@ stateChoices.addEventListener('click', (e) => {
     return;
   }
   let move = Number(el.getAttribute('data-move'));
-  tree = tree.moves[move].result;
+  tree = tree.moveOutcomes[move].outcome;
   drawGame();
 });
 
@@ -53,12 +39,12 @@ resetButton.addEventListener('click', (e) => {
 
 drawGame();
 
-function stateToHTML(state: GameState, moveIdx?: number): string {
+function boardToHTML(board: tictac.Board, moveIdx?: number): string {
   let table = '<table>';
   if (moveIdx !== null) {
     table = '<table data-move="' + String(moveIdx) + '">';
   }
-  return table + state.matrix.map(rowToHTML).join('\n') + '</table>';
+  return table + board.map(rowToHTML).join('\n') + '</table>';
 }
 
 function rowToHTML(row: number[]): string {
@@ -71,21 +57,16 @@ function cellToHTHML(cell: number): string {
 }
 
 function drawGame() {
-  currentState.innerHTML = stateToHTML(tree.gamestate);
+  currentState.innerHTML = boardToHTML(tree.current.state);
   console.log('>>>>>>>>>>>>');
-  stateChoices.innerHTML = tree.moves.map((move, idx) => {
-    let outcomeDistances = move.result.outcomeDistance;
-    let outcomeCounts = move.result.outcomeCounts;
-    console.log('Move %d -- X moves: %d, O moves: %d, X wins: %d, O wins: %d',
-      idx + 1,
-      outcomeDistances[1],
-      outcomeDistances[2],
-      outcomeCounts[1],
-      outcomeCounts[2]
-    );
-    return stateToHTML(move.result.gamestate, idx);
+  var i = 1;
+  if (!tree.moveOutcomes) {
+    stateChoices.innerHTML = '';
+    return;
+  }
+  stateChoices.innerHTML = tree.moveOutcomes.map((outcome, idx) => {
+    console.log('%d: %d', i, outcome.outcome.miniMaxScore);
+    i++;
+    return boardToHTML(outcome.outcome.current.state, idx);
   }).join('\n');
-  console.log('Optimal move is %d', tree.optimalMove + 1);
 }
-
-*/
