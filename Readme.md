@@ -43,6 +43,14 @@ and the
 # Progress
 
 Right now I have a playable 3x3 Tic-Tac-Toe game (see demo link above). Work is still
-in progress to be able to play *K-in-a-row* on an *NxN* board.
+in progress to be able to play **K-in-a-row** on an **NxN** board.
 
 Motivation for this was just to learn about minimax and play with Typescript :)
+
+TODO:
+
+ - [Alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
+ - Factor some logic out of UI code (e.g. choosing the best move should be in the minimax module)
+ - K-in-a-row on NxN board
+ - Nicer UI
+ - Factor out minimax to its own repo
