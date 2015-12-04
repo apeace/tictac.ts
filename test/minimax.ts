@@ -80,8 +80,10 @@ describe('MiniMax', () => {
     let ai: minimax.AI<TMGState, TMGMove>;
 
      it('Constructs with a Game', () => {
-       ai = new minimax.AI(TMG);
+       ai = new minimax.AI(TMG, {aiPlayers: [1]});
      });
+
+     // TODO
 
   }); // end AI
 

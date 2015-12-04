@@ -1,27 +1,70 @@
-export interface Game<T, M> {
+/*
+ * Game: The interface required for minimax AI to play a game
+ */
+
+// S = the type of the game state (e.g. a tic-tac-toe board)
+// M = the type of a game move (e.g. x/y coordinates in tic-tac-toe)
+export interface Game<S, M> {
+  // TODO deprecate?
+  // or, could be useful for UI turn-taking logic...
   players: number[];
-  initialState: GameState<T>;
-  isOver(state: T): boolean;
-  score(state: T, player: number): number;
-  moves(state: T): M[]
-  makeMove(state: GameState<T>, move: M): GameState<T>
+  // the starting state of the game
+  initialState: GameState<S>;
+  // returns true if the game has ended, false otherwise
+  isOver(state: S): boolean;
+  // returns the score for the given state, for the given player
+  score(state: S, player: number): number;
+  // returns all possible next moves for the given state
+  moves(state: S): M[]
+  // creates a new GameState by applying the given move
+  // to the given GameState
+  makeMove(state: GameState<S>, move: M): GameState<S>
 }
 
-export interface GameState<T> {
-  state: T;
+// represents the state of a game, including the actual state
+// (e.g. the tic-tac-toe board) and who's turn it is now
+// TODO: could use a better name, so we don't have state.state
+export interface GameState<S> {
+  state: S;
   playerTurn: number;
 }
 
+/*
+ * AI: The class that facilitates getting the next move
+ * for each AI player
+ */
 
 export class AI<T, M> {
 
-  constructor(private game: Game<T, M>) {
+  private tree: GameTree<T, M>;
+
+  constructor(
+    private game: Game<T, M>,
+    private conf: Config
+  ) {
+    // TODO
+    this.tree = new GameTree();
   }
 
 }
 
+// represents an AI configuration
+export interface Config {
+  // the player numbers 
+  aiPlayers: number[];
+}
 
-export interface GameTree<T, M> {
+/*
+ * GameTree: The class that facilitates incrementally building
+ * a minimax game tree
+ */
+
+export class GameTree<T, M> {
+  // TODO
+}
+
+
+export interface DeprecatedGameTree<T, M> {
   current: GameState<T>;
   miniMaxScores?: {[player: number]: number};
   moveOutcomes?: MoveOutcome<T, M>[];
@@ -29,12 +72,12 @@ export interface GameTree<T, M> {
 
 export interface MoveOutcome<T, M> {
   move: M;
-  outcome: GameTree<T, M>;
+  outcome: DeprecatedGameTree<T, M>;
 }
 
 // helper for creating a GameTree from a Game, and
 // computing the tree to a given lookAhead
-export function tree<T, M> (game: Game<T, M>, lookAhead=0): GameTree<T, M> {
+export function tree<T, M> (game: Game<T, M>, lookAhead=0): DeprecatedGameTree<T, M> {
   let tree = {
     current: game.initialState
   };
@@ -42,7 +85,7 @@ export function tree<T, M> (game: Game<T, M>, lookAhead=0): GameTree<T, M> {
 }
 
 // compute the tree to the given lookAhead
-export function computeTree<T, M> (game: Game<T, M>, tree: GameTree<T, M>, lookAhead=0): GameTree<T, M> {
+export function computeTree<T, M> (game: Game<T, M>, tree: DeprecatedGameTree<T, M>, lookAhead=0): DeprecatedGameTree<T, M> {
   let current = tree.current;
 
   if (game.isOver(current.state) || lookAhead === 0) {
