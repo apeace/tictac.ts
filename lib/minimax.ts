@@ -13,6 +13,14 @@ export interface GameState<T> {
 }
 
 
+export class AI<T, M> {
+
+  constructor(private game: Game<T, M>) {
+  }
+
+}
+
+
 export interface GameTree<T, M> {
   current: GameState<T>;
   miniMaxScores?: {[player: number]: number};
@@ -23,7 +31,6 @@ export interface MoveOutcome<T, M> {
   move: M;
   outcome: GameTree<T, M>;
 }
-
 
 // helper for creating a GameTree from a Game, and
 // computing the tree to a given lookAhead

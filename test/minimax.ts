@@ -75,6 +75,16 @@ describe('MiniMax', () => {
     }
   };
 
+  describe('AI with TMG', () => {
+
+    let ai: minimax.AI<TMGState, TMGMove>;
+
+     it('Constructs with a Game', () => {
+       ai = new minimax.AI(TMG);
+     });
+
+  }); // end AI
+
   describe('tree() with TMG', () => {
 
     let tree = minimax.tree;
