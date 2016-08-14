@@ -1,3 +1,9 @@
+# IDE
+.idea/
+
+# compiled JS
 build/
+
+# dependencies
 node_modules/
 typings/
