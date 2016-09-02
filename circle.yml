@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 6.0.0
+
+dependencies:
+  pre:
+    - npm config set spin false
+  override:
+    - npm install
+    - npm install --only=dev
+
+test:
+  override:
+    - npm test
