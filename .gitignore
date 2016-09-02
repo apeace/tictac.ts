@@ -1,6 +1,9 @@
 # IDE
 .idea/
 
+# vim swap files
+**/*.swp
+
 # compiled JS
 build/
 
