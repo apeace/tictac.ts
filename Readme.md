@@ -11,7 +11,6 @@ Note that you do not need anything installed globally except Node and NPM.
 
 ```
 npm install
-npm run bundle
 npm start
 open 'http://localhost:8000'
 ```
