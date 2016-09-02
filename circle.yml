@@ -19,6 +19,8 @@ deployment:
     commands:
       - npm run bundle
       - rm .gitignore
+      - git config set user.email "apeace@users.noreply.github.com"
+      - git config set user.name "Circle Deploy Script"
       - git add build/bundle.js
       - git commit build/bundle.js -m "Bundle for demo"
       - git push -f origin HEAD:gh-pages
