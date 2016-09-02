@@ -47,7 +47,7 @@ function boardToHTML(board: tictac.Board, moveIdx?: number): string {
 }
 
 function rowToHTML(row: number[], x: number): string {
-  return '  <tr>' + row.map((val, y) => cellToHTHML(val, x, y)).join('\n'); + '</tr>';
+  return '  <tr>' + row.map((val, y) => cellToHTHML(val, x, y)).join('\n') + '</tr>';
 }
 
 function cellToHTHML(cell: number, x: number, y: number): string {

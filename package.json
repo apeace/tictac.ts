@@ -1,8 +1,6 @@
 {
-  "name": "tictactoe-solver",
+  "name": "tictac.ts",
   "version": "0.0.0",
-  "description": "Solves tic tac toe",
-  "author": "Andrew Peace <andrew@coo.pe>",
   "dependencies": {},
   "devDependencies": {
     "expect.js": "^0.3.1",

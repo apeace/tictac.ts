@@ -36,10 +36,6 @@ npm install
 open 'http://localhost:8000'
 ```
 
-For editing, I recommend [Sublime Text 3](https://www.sublimetext.com/3)
-and the
-[Typescript plugin](https://github.com/Microsoft/TypeScript-Sublime-Plugin).
-
 # Progress
 
 Right now I have a playable 3x3 Tic-Tac-Toe game (see demo link above). Work is still
