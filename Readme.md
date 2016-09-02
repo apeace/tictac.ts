@@ -1,39 +1,32 @@
 # TicTac.ts
 
-In progress. [See demo here](https://apeace.github.io/tictac.ts/)
-
 A Tic-Tac-Toe solver in Typescript, using the
 [minimax algorithm](https://en.wikipedia.org/wiki/Minimax).
 
+[See demo here](https://apeace.github.io/tictac.ts/)
+
 # Dev setup
 
-I recommend running a four-tab setup while developing. Any file changes
-will automatically trigger a Typescript build, tests run, and browser bundle.
-
 Note that you do not need anything installed globally except Node and NPM.
-You can use Typescript, Mocha, and Browserify from `node_modules`.
 
 ```
-# first, install dependencies
 npm install
-
-# next, install typings for external libraries
-./node_modules/.bin/tsd install
-
-# in one terminal window, build with typescript
-./node_modules/.bin/tsc --watch
-
-# in another terminal window, run tests
-./node_modules/.bin/mocha --watch build/test/
-
-# in another terminal window, bundle for browser
-./node_modules/.bin/watchify build/app.js -o build/bundle.js
-
-# in another terminal window, run http server
-./node_modules/.bin/http-server -p 8000
-
-# open in browser
+npm run bundle
+npm start
 open 'http://localhost:8000'
+```
+
+While developing, you may want to run these:
+
+```
+# in one terminal window
+npm run build-watch
+
+# in another terminal window
+npm run test-watch
+
+# in another terminal window
+npm run bundle-watch
 ```
 
 # Progress

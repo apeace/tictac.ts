@@ -4,11 +4,16 @@
   "scripts": {
     "install-typings": "tsd install",
     "build": "npm run install-typings && tsc",
-    "start": "npm run build && http-server -p 8000",
-    "test": "npm run build && mocha build/test/"
+    "build-watch": "npm run install-typings && tsc --watch",
+    "bundle": "npm run build && browserify build/app.js -o build/bundle.js",
+    "bundle-watch": "watchify build/app.js -o build/bundle.js",
+    "start": "npm run bundle && http-server -p 8000",
+    "test": "npm run build && mocha build/test/",
+    "test-watch": "npm run build && mocha --watch build/test/"
   },
   "dependencies": {},
   "devDependencies": {
+    "browserify": "^13.1.0",
     "expect.js": "^0.3.1",
     "http-server": "^0.8.5",
     "mocha": "^2.3.3",
