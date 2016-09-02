@@ -12,3 +12,13 @@ dependencies:
 test:
   override:
     - npm test
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run bundle
+      - rm .gitignore
+      - git add build/bundle.js
+      - git commit build/bundle.js -m "Bundle for demo"
+      - git push -f origin HEAD:gh-pages
