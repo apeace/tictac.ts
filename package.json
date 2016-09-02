@@ -2,9 +2,9 @@
   "name": "tictac.ts",
   "version": "0.0.0",
   "scripts": {
-    "build": "tsc",
-    "prestart": "npm run build",
-    "start": "http-server -p 8000",
+    "install-typings": "tsd install",
+    "build": "npm run install-typings && tsc",
+    "start": "npm run build && http-server -p 8000",
     "test": "npm run build && mocha build/test/"
   },
   "dependencies": {},
