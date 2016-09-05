@@ -87,29 +87,53 @@ function scoreGame (
     // track whether any empty space has been seen
     let emptySpaceSeen = false;
 
-    // track how many we see in a row for a player
-    let inARow = {player: 0, count: 0};
+    // track how many cells we've seen in sequence for a player
+    let inSeq: {[seq: string]: {player: number, count: number}} = {
+        'row': {player: 0, count: 0},
+        'col': {player: 0, count: 0},
+    };
 
-    for (let row = 0; row < n; row++) {
-        for (let col = 0; col < n; col++) {
-            let player = board[row][col];
-            if (inARow.player === player) {
-                inARow.count++;
-            }
-            else if (player === 0) {
-                emptySpaceSeen = true;
-                inARow = {player: 0, count: 0};
-            }
-            else {
-                playerScores[player] = Math.max(playerScores[player], inARow.count);
-                inARow = {player, count: 0};
-            }
+    function playerSeen (seq: string, player: number) {
+        if (player === 0) {
+            emptySpaceSeen = true;
+            inSeq[seq] = {player: 0, count: 0};
         }
-        let lastPlayer = inARow.player;
-        if (lastPlayer === 0) continue;
-        playerScores[lastPlayer] = Math.max(playerScores[lastPlayer], inARow.count);
-        inARow = {player: 0, count: 0};
+        else if (inSeq[seq].player === player) {
+            inSeq[seq].count++;
+        }
+        else {
+            playerScores[player] = Math.max(playerScores[player], inSeq[seq].count);
+            inSeq[seq] = {player, count: 1};
+        }
     }
 
-    return {isOver: false, playerScores};
+    function reset (seq: string) {
+        let lastPlayer = inSeq[seq].player;
+        if (lastPlayer === 0) return;
+        playerScores[lastPlayer] = Math.max(playerScores[lastPlayer], inSeq[seq].count);
+        inSeq[seq] = {player: 0, count: 0};
+    }
+
+    // check rows and columns
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            playerSeen('row', board[i][j]);
+            playerSeen('col', board[j][i]);
+        }
+        reset('row');
+        reset('col');
+    }
+
+    let winnerFound = false;
+    for (let player of config.players) {
+        if (playerScores[player] === k) {
+            winnerFound = true;
+            playerScores[player] = Infinity;
+        }
+    }
+
+    return {
+        isOver: winnerFound || !emptySpaceSeen,
+        playerScores
+    };
 }

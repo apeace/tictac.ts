@@ -36,9 +36,9 @@ describe('TicTac', () => {
     ];
 
     const tie3x3 = [
-        [2, 0, 2],
-        [0, 2, 0],
-        [1, 1, 1],
+        [2, 1, 2],
+        [2, 2, 1],
+        [1, 2, 1],
     ];
 
     describe('game()', () => {
@@ -75,6 +75,30 @@ describe('TicTac', () => {
             expect(game.score(state)).to.eql({
                 isOver: false,
                 playerScores: {1: 0, 2: 0}
+            });
+        });
+
+        it('row win 3x3', () => {
+            let state = {state: rowWin3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: Infinity, 2: 1}
+            });
+        });
+
+        it('col win 3x3', () => {
+            let state = {state: colWin3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: Infinity, 2: 1}
+            });
+        });
+
+        it('tie 3x3', () => {
+            let state = {state: tie3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: 2, 2: 2}
             });
         });
 
