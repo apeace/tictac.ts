@@ -9,8 +9,8 @@
     "bundle": "npm run build && browserify build/app.js -o build/bundle.js",
     "bundle-watch": "watchify build/app.js -o build/bundle.js",
     "start": "npm run bundle && http-server -p 8000",
-    "test": "npm run build && mocha build/test/",
-    "test-watch": "npm run build && mocha --watch build/test/"
+    "test": "npm run build && mocha --recursive build/test/",
+    "test-watch": "npm run build && mocha --watch --recursive build/test/"
   },
   "dependencies": {},
   "devDependencies": {

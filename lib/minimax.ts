@@ -12,6 +12,10 @@ export interface GameState<T> {
   playerTurn: number;
 }
 
+export interface GameScore {
+    isOver: boolean;
+    playerScores: {[player: number]: number};
+}
 
 export interface GameTree<T, M> {
   current: GameState<T>;
