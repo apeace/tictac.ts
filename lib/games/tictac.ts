@@ -91,6 +91,8 @@ function scoreGame (
     let inSeq: {[seq: string]: {player: number, count: number}} = {
         'row': {player: 0, count: 0},
         'col': {player: 0, count: 0},
+        'left-diag-lower': {player: 0, count: 0},
+        'left-diag-upper': {player: 0, count: 0}
     };
 
     function playerSeen (seq: string, player: number) {
@@ -102,7 +104,10 @@ function scoreGame (
             inSeq[seq].count++;
         }
         else {
-            playerScores[player] = Math.max(playerScores[player], inSeq[seq].count);
+            let lastPlayer = inSeq[seq].player;
+            if (lastPlayer !== 0) {
+                playerScores[lastPlayer] = Math.max(playerScores[lastPlayer], inSeq[seq].count);
+            }
             inSeq[seq] = {player, count: 1};
         }
     }
@@ -114,14 +119,24 @@ function scoreGame (
         inSeq[seq] = {player: 0, count: 0};
     }
 
-    // check rows and columns
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
+            // check rows and columns
             playerSeen('row', board[i][j]);
             playerSeen('col', board[j][i]);
+            // check diagonals
+            let diagRow = i+j;
+            if (diagRow >= n) continue;
+            let diagCol = j;
+            playerSeen('left-diag-lower', board[diagRow][diagCol]);
+            if (diagRow !== diagCol) {
+                playerSeen('left-diag-upper', board[diagCol][diagRow]);
+            }
         }
         reset('row');
         reset('col');
+        reset('left-diag-lower');
+        reset('left-diag-upper');
     }
 
     let winnerFound = false;

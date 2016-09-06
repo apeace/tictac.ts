@@ -29,6 +29,12 @@ describe('TicTac', () => {
         [2, 0, 1],
     ];
 
+    const leftDiagInProg3x3 = [
+        [0, 2, 0],
+        [1, 0, 2],
+        [0, 1, 0],
+    ];
+
     const rightDiagWin3x3 = [
         [2, 0, 1],
         [2, 1, 0],
@@ -82,7 +88,7 @@ describe('TicTac', () => {
             let state = {state: rowWin3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: true,
-                playerScores: {1: Infinity, 2: 1}
+                playerScores: {1: Infinity, 2: 2}
             });
         });
 
@@ -90,7 +96,23 @@ describe('TicTac', () => {
             let state = {state: colWin3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: true,
-                playerScores: {1: Infinity, 2: 1}
+                playerScores: {1: Infinity, 2: 2}
+            });
+        });
+
+        it('left diag win 3x3', () => {
+            let state = {state: leftDiagWin3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: Infinity, 2: 2}
+            });
+        });
+
+        it('left diag in-prog 3x3', () => {
+            let state = {state: leftDiagInProg3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: false,
+                playerScores: {1: 2, 2: 2}
             });
         });
 
