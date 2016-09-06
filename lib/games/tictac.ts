@@ -130,13 +130,11 @@ function scoreGame (
             let ldiagRow = i+j;
             if (ldiagRow >= n) continue;
             let ldiagCol = j;
-            let rdiagRow = n - 1 - ldiagRow;
-            let rdiagCol = ldiagCol;
             playerSeen('left-diag-lower', board[ldiagRow][ldiagCol]);
-            playerSeen('right-diag-upper', board[rdiagRow][rdiagCol]);
+            playerSeen('right-diag-lower', board[ldiagRow][n-1-ldiagCol]);
             if (ldiagRow !== ldiagCol) {
                 playerSeen('left-diag-upper', board[ldiagCol][ldiagRow]);
-                playerSeen('right-diag-lower', board[rdiagCol][rdiagRow]);
+                playerSeen('right-diag-upper', board[ldiagCol][n-1-ldiagRow]);
             }
         }
         reset('row');

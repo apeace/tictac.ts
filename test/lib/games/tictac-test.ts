@@ -78,11 +78,11 @@ describe('TicTac', () => {
 
     });
 
-    describe('score()', () => {
+    describe('score() 3x3', () => {
 
         let game = tictac.game({players: [1, 2], n: 3, k: 3});
 
-        it('empty 3x3', () => {
+        it('empty', () => {
             let state = {state: empty3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: false,
@@ -90,7 +90,7 @@ describe('TicTac', () => {
             });
         });
 
-        it('row win 3x3', () => {
+        it('row win', () => {
             let state = {state: rowWin3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: true,
@@ -98,7 +98,7 @@ describe('TicTac', () => {
             });
         });
 
-        it('col win 3x3', () => {
+        it('col win', () => {
             let state = {state: colWin3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: true,
@@ -106,7 +106,7 @@ describe('TicTac', () => {
             });
         });
 
-        it('left diag win 3x3', () => {
+        it('left diag win', () => {
             let state = {state: leftDiagWin3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: true,
@@ -114,7 +114,7 @@ describe('TicTac', () => {
             });
         });
 
-        it('left diag in-prog 3x3', () => {
+        it('left diag in-prog', () => {
             let state = {state: leftDiagInProg3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: false,
@@ -122,7 +122,7 @@ describe('TicTac', () => {
             });
         });
 
-        it('right diag win 3x3', () => {
+        it('right diag win', () => {
             let state = {state: rightDiagWin3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: true,
@@ -130,7 +130,7 @@ describe('TicTac', () => {
             });
         });
 
-        it('right diag in-prog 3x3', () => {
+        it('right diag in-prog', () => {
             let state = {state: rightDiagInProg3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: false,
@@ -138,7 +138,7 @@ describe('TicTac', () => {
             });
         });
 
-        it('tie 3x3', () => {
+        it('tie', () => {
             let state = {state: tie3x3, playerTurn: 1};
             expect(game.score(state)).to.eql({
                 isOver: true,
