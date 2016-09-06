@@ -92,7 +92,9 @@ function scoreGame (
         'row': {player: 0, count: 0},
         'col': {player: 0, count: 0},
         'left-diag-lower': {player: 0, count: 0},
-        'left-diag-upper': {player: 0, count: 0}
+        'left-diag-upper': {player: 0, count: 0},
+        'right-diag-lower': {player: 0, count: 0},
+        'right-diag-upper': {player: 0, count: 0}
     };
 
     function playerSeen (seq: string, player: number) {
@@ -125,18 +127,24 @@ function scoreGame (
             playerSeen('row', board[i][j]);
             playerSeen('col', board[j][i]);
             // check diagonals
-            let diagRow = i+j;
-            if (diagRow >= n) continue;
-            let diagCol = j;
-            playerSeen('left-diag-lower', board[diagRow][diagCol]);
-            if (diagRow !== diagCol) {
-                playerSeen('left-diag-upper', board[diagCol][diagRow]);
+            let ldiagRow = i+j;
+            if (ldiagRow >= n) continue;
+            let ldiagCol = j;
+            let rdiagRow = n - 1 - ldiagRow;
+            let rdiagCol = ldiagCol;
+            playerSeen('left-diag-lower', board[ldiagRow][ldiagCol]);
+            playerSeen('right-diag-upper', board[rdiagRow][rdiagCol]);
+            if (ldiagRow !== ldiagCol) {
+                playerSeen('left-diag-upper', board[ldiagCol][ldiagRow]);
+                playerSeen('right-diag-lower', board[rdiagCol][rdiagRow]);
             }
         }
         reset('row');
         reset('col');
         reset('left-diag-lower');
         reset('left-diag-upper');
+        reset('right-diag-lower');
+        reset('right-diag-upper');
     }
 
     let winnerFound = false;
