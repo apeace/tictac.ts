@@ -11,48 +11,6 @@ describe('TicTac', () => {
         [0, 0, 0],
     ];
 
-    const rowWin3x3 = [
-        [2, 0, 2],
-        [0, 2, 0],
-        [1, 1, 1],
-    ];
-
-    const colWin3x3 = [
-        [2, 0, 1],
-        [0, 2, 1],
-        [2, 0, 1],
-    ];
-
-    const leftDiagWin3x3 = [
-        [1, 0, 2],
-        [2, 1, 0],
-        [2, 0, 1],
-    ];
-
-    const leftDiagInProg3x3 = [
-        [0, 2, 0],
-        [1, 0, 2],
-        [0, 1, 0],
-    ];
-
-    const rightDiagWin3x3 = [
-        [2, 0, 1],
-        [2, 1, 0],
-        [1, 0, 2],
-    ];
-
-    const rightDiagInProg3x3 = [
-        [0, 2, 0],
-        [2, 0, 1],
-        [0, 1, 0],
-    ];
-
-    const tie3x3 = [
-        [2, 1, 2],
-        [2, 2, 1],
-        [1, 2, 1],
-    ];
-
     describe('game()', () => {
 
         it('players can\'t be modified later', () => {
@@ -76,9 +34,51 @@ describe('TicTac', () => {
             expect(g.initialState).to.eql({state: empty3x3, playerTurn: 1});
         });
 
-    });
+    }); // end game()
 
-    describe('score() 3x3', () => {
+    describe('score() 3x3 3-in-a-row', () => {
+
+        const rowWin3x3 = [
+            [2, 0, 2],
+            [0, 2, 0],
+            [1, 1, 1],
+        ];
+
+        const colWin3x3 = [
+            [2, 0, 1],
+            [0, 2, 1],
+            [2, 0, 1],
+        ];
+
+        const leftDiagWin3x3 = [
+            [1, 0, 2],
+            [2, 1, 0],
+            [2, 0, 1],
+        ];
+
+        const leftDiagInProg3x3 = [
+            [0, 2, 0],
+            [1, 0, 2],
+            [0, 1, 0],
+        ];
+
+        const rightDiagWin3x3 = [
+            [2, 0, 1],
+            [2, 1, 0],
+            [1, 0, 2],
+        ];
+
+        const rightDiagInProg3x3 = [
+            [0, 2, 0],
+            [2, 0, 1],
+            [0, 1, 0],
+        ];
+
+        const tie3x3 = [
+            [2, 1, 2],
+            [2, 2, 1],
+            [1, 2, 1],
+        ];
 
         let game = tictac.game({players: [1, 2], n: 3, k: 3});
 
@@ -146,6 +146,126 @@ describe('TicTac', () => {
             });
         });
 
-    });
+    }); // end score() 3x3 3-in-a-row
+
+    describe('score() 4x4 4-in-a-row', () => {
+
+        const empty4x4 = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ];
+
+        const rowWin4x4 = [
+            [2, 0, 2, 2],
+            [0, 2, 0, 0],
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+        ];
+
+        const colWin3x3 = [
+            [2, 0, 1],
+            [0, 2, 1],
+            [2, 0, 1],
+        ];
+
+        const leftDiagWin3x3 = [
+            [1, 0, 2],
+            [2, 1, 0],
+            [2, 0, 1],
+        ];
+
+        const leftDiagInProg3x3 = [
+            [0, 2, 0],
+            [1, 0, 2],
+            [0, 1, 0],
+        ];
+
+        const rightDiagWin3x3 = [
+            [2, 0, 1],
+            [2, 1, 0],
+            [1, 0, 2],
+        ];
+
+        const rightDiagInProg3x3 = [
+            [0, 2, 0],
+            [2, 0, 1],
+            [0, 1, 0],
+        ];
+
+        const tie3x3 = [
+            [2, 1, 2],
+            [2, 2, 1],
+            [1, 2, 1],
+        ];
+
+        let game = tictac.game({players: [1, 2], n: 4, k: 4});
+
+        it('empty', () => {
+            let state = {state: empty4x4, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: false,
+                playerScores: {1: 0, 2: 0}
+            });
+        });
+
+        it('row win', () => {
+            let state = {state: rowWin4x4, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: Infinity, 2: 2}
+            });
+        });
+
+        it.skip('col win', () => {
+            let state = {state: colWin3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: Infinity, 2: 2}
+            });
+        });
+
+        it.skip('left diag win', () => {
+            let state = {state: leftDiagWin3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: Infinity, 2: 2}
+            });
+        });
+
+        it.skip('left diag in-prog', () => {
+            let state = {state: leftDiagInProg3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: false,
+                playerScores: {1: 2, 2: 2}
+            });
+        });
+
+        it.skip('right diag win', () => {
+            let state = {state: rightDiagWin3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: Infinity, 2: 2}
+            });
+        });
+
+        it.skip('right diag in-prog', () => {
+            let state = {state: rightDiagInProg3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: false,
+                playerScores: {1: 2, 2: 2}
+            });
+        });
+
+        it.skip('tie', () => {
+            let state = {state: tie3x3, playerTurn: 1};
+            expect(game.score(state)).to.eql({
+                isOver: true,
+                playerScores: {1: 2, 2: 2}
+            });
+        });
+
+    }); // end score() 3x3 3-in-a-row
 
 });
